@@ -1,0 +1,77 @@
+% 03.mpi.file.transfer.tex
+
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{MPI File Transfer Report}
+\author{Nguyen Ngoc Nhat Linh}
+\date{24/04/2024}
+
+\begin{document}
+
+\maketitle
+
+\section{MPI Implementation}
+
+For this project, I chose to use the Open MPI implementation of the Message Passing Interface (MPI). I selected Open MPI because it is a widely used and well-supported MPI implementation that offers good performance and portability across different platforms.
+
+\section{MPI Service Design}
+
+To design the MPI service, I followed a client-server architecture. The server process is responsible for reading the file from disk and broadcasting it to all the other processes. The non-server processes act as clients, receiving the file from the server and writing it to disk. Figure \ref{fig:mpi_service} illustrates the design of the MPI service.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{mpi_service_design.png}
+  \caption{MPI Service Design}
+  \label{fig:mpi_service}
+\end{figure}
+
+\section{System Organization}
+
+The system is organized in a distributed manner, with multiple processes running on different compute nodes. Each compute node may contain one or more processes. Figure \ref{fig:system_organization} depicts the organization of the system.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{system_organization.png}
+  \caption{System Organization}
+  \label{fig:system_organization}
+\end{figure}
+
+\section{File Transfer Implementation}
+
+The file transfer is implemented using MPI's collective communication routines. The server process reads the file from disk, determines its size, and broadcasts the size and contents to all other processes using the \texttt{MPI\_Bcast} function. The non-server processes receive the size and contents using the same \texttt{MPI\_Bcast} function and write the received data to disk. The code snippet below demonstrates the file transfer implementation:
+
+\begin{verbatim}
+// Server code
+std::ifstream file(FILENAME, std::ios::binary);
+// ...
+MPI_Bcast(&file_size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+MPI_Bcast(buffer, file_size, MPI_CHAR, 0, MPI_COMM_WORLD);
+// ...
+
+// Non-server processes
+int file_size = 0;
+MPI_Bcast(&file_size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+MPI_Bcast(buffer, file_size, MPI_CHAR, 0, MPI_COMM_WORLD);
+// ...
+\end{verbatim}
+
+\section{Responsibilities}
+
+In this project, the responsibilities are divided as follows:
+
+\begin{itemize}
+  \item Server process:
+  \begin{itemize}
+    \item Reads the file from disk.
+    \item Determines the file size.
+    \item Broadcasts the file size and contents to all other processes.
+  \end{itemize}
+  \item Non-server processes:
+  \begin{itemize}
+    \item Receive the file size and contents from the server.
+    \item Write the received data to disk.
+  \end{itemize}
+\end{itemize}
+
+\end{document}
