@@ -1,0 +1,77 @@
+% 05.word.count.tex
+
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{MapReduce Word Count Report}
+\author{Nguyen Ngoc Nhat Linh}
+\date{24/04/2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Mapper and Reducer in Word Count}
+
+In the Word Count example implemented using a MapReduce framework, both the Mapper and Reducer play crucial roles in the data processing pipeline.
+
+\subsection{Mapper}
+
+The Mapper component in the Word Count example takes the input data and processes it to produce intermediate key-value pairs. The key represents a word, and the value represents the count of that word. The Mapper performs the following steps:
+
+\begin{enumerate}
+  \item Read a line of text from the input data.
+  \item Tokenize the line into individual words.
+  \item For each word, emit a key-value pair where the key is the word and the value is 1.
+\end{enumerate}
+
+Figure \ref{fig:mapper} illustrates the working of the Mapper component in the Word Count example.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{mapper.png}
+  \caption{Mapper Working in Word Count}
+  \label{fig:mapper}
+\end{figure}
+
+\subsection{Reducer}
+
+The Reducer component in the Word Count example receives the intermediate key-value pairs produced by the Mapper and performs a reduction operation to aggregate values with the same key. The Reducer performs the following steps:
+
+\begin{enumerate}
+  \item Receive a key-value pair where the key is a word and the values are the counts for that word.
+  \item Sum up the counts for each word.
+  \item Emit a key-value pair where the key is the word and the value is the final word count.
+\end{enumerate}
+
+Figure \ref{fig:reducer} depicts the working of the Reducer component in the Word Count example.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{reducer.png}
+  \caption{Reducer Working in Word Count}
+  \label{fig:reducer}
+\end{figure}
+
+\section{Responsibilities}
+
+In the Word Count example implemented using a MapReduce framework, the responsibilities are divided as follows:
+
+\begin{itemize}
+  \item Mapper:
+  \begin{itemize}
+    \item Reads a line of text from the input data.
+    \item Tokenizes the line into individual words.
+    \item Emits a key-value pair for each word, where the key is the word and the value is 1.
+  \end{itemize}
+  \item Reducer:
+  \begin{itemize}
+    \item Receives intermediate key-value pairs from the Mapper.
+    \item Aggregates the values for each key (word) by summing them up.
+    \item Emits a key-value pair for each word, where the key is the word and the value is the final word count.
+  \end{itemize}
+\end{itemize}
+
+The Mapper and Reducer components work together in the Word Count example to perform the necessary data processing and produce the final word count.
+
+\end{document}
