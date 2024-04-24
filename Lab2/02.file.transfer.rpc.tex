@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{RPC File Transfer Report}
+\author{Nguyen Ngoc Nhat Linh}
+\date{\24/04/2024}
+\maketitle
+
+\section{Design of RPC Service}
+
+The RPC service for file transfer is designed using the client-server architecture. The client initiates a request to upload a file, and the server handles the request and stores the file on the server-side. The communication between the client and server is achieved using a remote procedure call (RPC) framework.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{rpc_service_design.png}
+  \caption{Design of the RPC service for file transfer.}
+\end{figure}
+
+Figure 1 illustrates the design of the RPC service for file transfer. The client and server communicate over a network using a defined protocol. The client sends a file to the server, which processes the file and stores it on the server-side.
+
+\section{System Organization}
+
+The system is organized into two main components: the client and the server. The client component is responsible for selecting a file to upload and initiating the RPC request. The server component receives the file from the client, processes it, and stores it on the server-side.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{system_organization.png}
+  \caption{Organization of the file transfer system.}
+\end{figure}
+
+Figure 2 shows the organization of the file transfer system. The client and server components communicate with each other through the RPC framework. The client interacts with the user to select a file for upload, while the server handles the file transfer and storage.
+
+\section{File Transfer Implementation}
+
+The file transfer is implemented using the chosen RPC framework. The client reads the file data, sends it to the server through an RPC call, and the server receives the file data and saves it on the server-side.
+
+Here is a code snippet illustrating the file transfer implementation using the RPC framework:
+
+\begin{verbatim}
+-- Code snippet in your preferred programming language and RPC framework
+-- to implement file transfer.
+
+-- Client code
+file_path = "path/to/file.txt"
+file_data = read_file(file_path)
+rpc_call("upload_file", file_data)
+
+-- Server code
+function upload_file(file_data)
+    save_file(file_data, "path/to/save/file.txt")
+end
+\end{verbatim}
+
+In the code snippet, the client reads the file from the specified file path and sends the file data through an RPC call named "upload_file". On the server-side, the server receives the file data and saves it to the desired location.
+
+\section{Assignment of Responsibilities}
+
+In the development of the file transfer system, the following responsibilities were assigned:
+
+\begin{itemize}
+  \item Your Name:
+  \begin{itemize}
+    \item Design and implementation of the RPC service.
+    \item Development of the client component.
+  \end{itemize}
+  \item Collaborator's Name:
+  \begin{itemize}
+    \item Development of the server component.
+    \item Implementation of file storage and handling.
+  \end{itemize}
+\end{itemize}
+
+Both team members collaborated closely to ensure effective communication and integration of the client and server components.
+
+\end{document}
