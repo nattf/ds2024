@@ -1,0 +1,92 @@
+\documentclass{article}
+
+\title{File Transfer System Report}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This report presents the design and implementation of a file transfer system. The system allows users to transfer files securely and efficiently over a network. The design includes a custom file transfer protocol, system organization, and a code snippet illustrating the file transfer implementation.
+
+\section{Protocol Design}
+The file transfer protocol is designed to ensure reliable and secure data transfer between the client and server. It includes the following key features:
+
+\begin{itemize}
+  \item \textbf{Handshake}: The protocol begins with a handshake phase where the client and server establish a connection and negotiate parameters such as encryption algorithms and session keys.
+  \item \textbf{File Metadata Exchange}: The client sends the file name, size, and other metadata to the server to prepare for the file transfer.
+  \item \textbf{Data Transfer}: The actual file data is divided into smaller chunks, and each chunk is sent from the client to the server. The protocol ensures the integrity of the data by using checksums or hash functions.
+  \item \textbf{Acknowledgment}: After receiving each chunk of data, the server sends an acknowledgment to the client to confirm successful reception. In case of errors, retransmission mechanisms are employed.
+  \item \textbf{Completion and Closure}: Once all the data has been successfully transferred, the server sends a completion message to the client, indicating the successful completion of the file transfer. The connection is then closed.
+\end{itemize}
+
+Figure 1 illustrates the flow of the file transfer protocol.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{protocol_diagram.png}
+  \caption{File Transfer Protocol}
+  \label{fig:protocol}
+\end{figure}
+
+\section{System Organization}
+The file transfer system is organized into two main components: the client and the server. The client component is responsible for initiating the file transfer, while the server component receives and stores the transferred files. The system architecture follows a client-server model, as depicted in Figure 2.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{system_organization.png}
+  \caption{System Organization}
+  \label{fig:organization}
+\end{figure}
+
+The client and server communicate using the file transfer protocol described in the previous section. The client component provides a user interface for selecting and initiating file transfers, while the server component listens for incoming connections and handles the file transfers.
+
+\section{File Transfer Implementation}
+The implementation of the file transfer system involves writing code for both the client and server components. The following code snippet illustrates the file transfer procedure in Python:
+
+\begin{verbatim}
+# Client-side code snippet
+import socket
+
+# Connection establishment and handshake
+# ...
+
+# Send file metadata to the server
+# ...
+
+# Open the file to be sent
+with open(file_path, 'rb') as file:
+    # Read and send data in chunks
+    # ...
+
+# Close the connection
+# ...
+
+# Server-side code snippet
+import socket
+
+# Connection establishment and handshake
+# ...
+
+# Receive file metadata from the client
+# ...
+
+# Create a new file to store the received data
+# ...
+
+# Receive and write file data in chunks
+# ...
+
+# Close the file and the connection
+# ...
+\end{verbatim}
+
+The code snippet demonstrates the basic steps involved in the file transfer process, including connection establishment, metadata exchange, data transfer in chunks, and handling file operations.
+
+\section{Conclusion}
+The file transfer system presented in this report provides a reliable and secure mechanism for transferring files over a network. The custom file transfer protocol ensures the integrity and confidentiality of the transferred data. The system's organization follows a client-server model, and the implementation code snippet showcases the file transfer procedure.
+
+Further enhancements can be made to the system, such as implementing error handling mechanisms, adding support for parallel transfers, and incorporating encryption techniques to enhance security.
+
+\end{document}
