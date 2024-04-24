@@ -1,0 +1,62 @@
+% 04.word.count.tex
+
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{MapReduce Word Count Report}
+\author{Nguyen Ngoc Nhat Linh}
+\date{24/04/2024}
+
+\begin{document}
+
+\maketitle
+
+\section{MapReduce Implementation}
+
+For this project, I implemented a simplified version of the Word Count example using C++. Although there are various MapReduce frameworks available, I chose to create a custom implementation using C++ due to the unavailability of a MapReduce framework for C/C++ at the moment. This allowed me to demonstrate the basic logic of the Word Count algorithm.
+
+\section{Mapper and Reducer}
+
+The Mapper and Reducer components in my implementation follow the typical MapReduce paradigm. 
+
+The Mapper component reads the input data, which in this case is a text file, and processes it to produce intermediate key-value pairs. It splits the input into words, counts the occurrences of each word, and emits the word as the key and the count as the value. Figure \ref{fig:mapper} illustrates the working of the Mapper component.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{mapper.png}
+  \caption{Mapper Working}
+  \label{fig:mapper}
+\end{figure}
+
+The Reducer component takes the intermediate key-value pairs produced by the Mapper and performs a reduction operation to aggregate values with the same key. In the Word Count example, the Reducer sums up the counts for each word received and emits the final word count. Figure \ref{fig:reducer} depicts the working of the Reducer component.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{reducer.png}
+  \caption{Reducer Working}
+  \label{fig:reducer}
+\end{figure}
+
+\section{Responsibilities}
+
+In this project, the responsibilities are divided as follows:
+
+\begin{itemize}
+  \item Mapper:
+  \begin{itemize}
+    \item Reads the input data (text file).
+    \item Splits the input into words.
+    \item Counts the occurrences of each word.
+    \item Emits the word as the key and the count as the value.
+  \end{itemize}
+  \item Reducer:
+  \begin{itemize}
+    \item Receives intermediate key-value pairs from the Mapper.
+    \item Aggregates the values for each key (word).
+    \item Emits the final word count.
+  \end{itemize}
+\end{itemize}
+
+The Mapper and Reducer components work together to perform the Word Count algorithm using the MapReduce paradigm.
+
+\end{document}
